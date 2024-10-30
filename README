@@ -1,0 +1,9 @@
+## Research
+
+- https://chatgpt.com/share/670dcf03-5950-8005-87f6-6193e2a55b5e
+
+## Setup notes:
+
+1. write docker compose file
+1. `docker network create phpbb-network`
+1. `docker compose up -d`

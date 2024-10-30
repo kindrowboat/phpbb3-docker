@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  phpbb:
+    image: phpbb
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: phpbb
+    restart: unless-stopped
+    ports:
+      - "6862:80"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_NAME=phpbb
+      - DB_USER=phpbb
+      - DB_PASS=comingaftertinyfractures
+    volumes:
+      - ./phpbb_data:/var/www/phpbb/data
+
+  db:
+    image: mariadb:latest
+    container_name: phpbb_db
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=comingaftertinyfractures
+      - MYSQL_DATABASE=phpbb
+      - MYSQL_USER=phpbb
+      - MYSQL_PASSWORD=comingaftertinyfractures
+    volumes:
+      - ./db:/var/lib/mysql
+
+networks:
+  phpbb-network:
+    external: true
+
