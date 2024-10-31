@@ -13,26 +13,28 @@ services:
     depends_on:
       - db
     environment:
-      - DB_HOST=db
-      - DB_NAME=phpbb
-      - DB_USER=phpbb
-      - DB_PASS=comingaftertinyfractures
+      - MSMTP_FROM=${MSMTP_FROM}
+      - MSMTP_USER=${MSMTP_USER}
+      - MSMTP_PASSWORD=${MSMTP_PASSWORD}
+      - MSMTP_HOST=${MSMTP_HOST}
+      - MSMTP_PORT=${MSMTP_PORT}
+      - MSMTP_TLS=${MSMTP_TLS}
+      - MSMTP_TLS_TRUST_FILE=${MSMTP_TLS_TRUST_FILE}
+      - PHPBB_DB_HOST=db
+      - PHPBB_DB_NAME=${MYSQL_DATABASE}
+      - PHPBB_DB_USER=${MYSQL_USER}
+      - PHPBB_DB_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-      - ./phpbb_data:/var/www/phpbb/data
+      - ./phpbb:/var/www/html/phpbb
 
   db:
     image: mariadb:latest
     container_name: phpbb_db
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD=comingaftertinyfractures
-      - MYSQL_DATABASE=phpbb
-      - MYSQL_USER=phpbb
-      - MYSQL_PASSWORD=comingaftertinyfractures
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - ./db:/var/lib/mysql
-
-networks:
-  phpbb-network:
-    external: true
-
