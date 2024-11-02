@@ -1,9 +1,29 @@
-## Research
+Files needed to run phpbb3 in docker (behind a reverse proxy.)
 
-- https://chatgpt.com/share/670dcf03-5950-8005-87f6-6193e2a55b5e
+Exposition at https://tilde.town/~kindrobot/post/phpbb3-docker/
 
-## Setup notes:
+## Pre-requirements
 
-1. write docker compose file
-1. `docker network create phpbb-network`
-1. `docker compose up -d`
+- unzip
+- docker with docker-compose
+- an internet connection
+
+## Fresh install
+
+```bash
+cp .env.example .env
+# fill out .env
+./clean-install.sh # downloads and unzips phpbb3
+# answer yes at prompt
+sudo docker-compose build
+sudo docker-compose up -d # -d to run in background
+```
+
+## License
+
+Both phpbb3 and this project are licensed under the GNU GPL v3.
+
+## AI Disclaimer
+
+Portions of this repo have been contrtibuted by or made with assistance from an
+LLM.
